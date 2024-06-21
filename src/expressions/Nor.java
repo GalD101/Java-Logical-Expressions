@@ -37,4 +37,19 @@ public class Nor extends BinaryExpression implements Expression {
     protected String getOperatorSymbol() {
         return symbol;
     }
+
+    @Override
+    public Expression nandify() {
+        // NOR(A, B) = NAND[ NAND( NAND(A, A), NAND(B, B) ) , NAND(NAND(A, A) , NAND(B, B) ) ]
+        return new Nand
+                (new Nand
+                        (new Nand(this.getLeft(), this.getLeft()), new Nand(this.getRight(), this.getRight()))
+                        , new Nand
+                        (new Nand(this.getLeft(), this.getLeft()), new Nand(this.getRight(), this.getRight())));
+    }
+
+    @Override
+    public Expression norify() {
+        return new Nor(this.getLeft().norify(), this.getRight().norify());
+    }
 }

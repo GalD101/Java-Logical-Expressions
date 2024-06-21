@@ -43,4 +43,18 @@ public class Or extends BinaryExpression implements Expression {
     protected String getOperatorSymbol() {
         return symbol;
     }
+
+    @Override
+    public Expression nandify() {
+        // OR(A, B) = NAND(NAND(A, A), NAND(B, B))
+        return new Nand(new Nand(this.getLeft(), this.getLeft()), new Nand(this.getRight(), this.getRight()));
+    }
+
+    @Override
+    public Expression norify() {
+        // OR(A, B) = NOR(NOR(A, B), NOR(A, B))
+        return new Nor
+                (new Nor(this.getLeft(), this.getRight())
+                        , new Nor(this.getLeft(), this.getRight()));
+    }
 }

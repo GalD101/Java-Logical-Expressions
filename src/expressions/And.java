@@ -48,4 +48,19 @@ public class And extends BinaryExpression implements Expression {
     protected String getOperatorSymbol() {
         return symbol;
     }
+
+    @Override
+    public Expression nandify() {
+        // TODO: Maybe there is a need to add a recursive call to nandify() for the left and right expressions
+        // AND(A,B) = NAND(NAND(A,B),NAND(A,B))
+        return new Nand(new Nand(this.getLeft(), this.getRight()), new Nand(this.getLeft(), this.getRight()));
+    }
+
+    @Override
+    public Expression norify() {
+        // AND(A, B) = NOR(NOR(A, A), NOR(B, B))
+        return new Nor(
+                new Nor(this.getLeft(), this.getLeft()),
+                new Nor(this.getRight(), this.getRight()));
+    }
 }

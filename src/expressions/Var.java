@@ -67,6 +67,16 @@ public class Var implements Expression {
         // You can think of it as one of the base cases of the recursion
         return expression;
     }
+
+    @Override
+    public Expression nandify() {
+        return this;
+    }
+
+    @Override
+    public Expression norify() {
+        return this;
+    }
 //
 //    public Expression replace(String var, Expression expression) {
 //        // Here I need to take the "this" object which is a variable

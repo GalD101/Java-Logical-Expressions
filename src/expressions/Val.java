@@ -45,4 +45,14 @@ public class Val implements Expression {
         // thus I will simply return this since there is no var to replace ever
         return this; // also breaks recursions (see other implementations)
     }
+
+    @Override
+    public Expression nandify() {
+        return this;
+    }
+
+    @Override
+    public Expression norify() {
+        return this;
+    }
 }

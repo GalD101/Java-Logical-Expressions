@@ -37,4 +37,21 @@ public class Xnor extends BinaryExpression implements Expression {
     protected String getOperatorSymbol() {
         return symbol;
     }
+
+    @Override
+    public Expression nandify() {
+        // XNOR(A, B) = NAND[ NAND( NAND(A, A), NAND(B, B) ), ( NAND(A, B) ) ]
+        return new Nand
+                (new Nand
+                        (new Nand(this.getLeft(), this.getLeft()), new Nand(this.getRight(), this.getRight()))
+                        , new Nand(this.getLeft(), this.getRight()));
+    }
+
+    @Override
+    public Expression norify() {
+        // NAND(A, B) = NOR[NOR( A, NOR(A, B) ), NOR( B, NOR(A, B) )]
+        return new Nor
+                (new Nor(this.getLeft(), new Nor(this.getLeft(), this.getRight()))
+                        , new Nor(this.getRight(), new Nor(this.getLeft(), this.getRight())));
+    }
 }
