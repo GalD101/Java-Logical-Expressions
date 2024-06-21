@@ -40,14 +40,13 @@ public class Not extends UnaryExpression implements Expression {
 
     @Override
     public Expression nandify() {
-        // TODO: Maybe add
         // NOT(X) is equivalent to NAND(X, X)
-        return new Nand(this.getExpression(), this.getExpression());
+        return new Nand(this.getExpression().nandify(), this.getExpression().nandify());
     }
 
     @Override
     public Expression norify() {
         // NOT(A) = NOR(A, A)
-        return new Nor(this.getExpression(), this.getExpression());
+        return new Nor(this.getExpression().norify(), this.getExpression().norify());
     }
 }

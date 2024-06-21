@@ -47,14 +47,14 @@ public class Or extends BinaryExpression implements Expression {
     @Override
     public Expression nandify() {
         // OR(A, B) = NAND(NAND(A, A), NAND(B, B))
-        return new Nand(new Nand(this.getLeft(), this.getLeft()), new Nand(this.getRight(), this.getRight()));
+        return new Nand(new Nand(this.getLeft().nandify(), this.getLeft().nandify()), new Nand(this.getRight().nandify(), this.getRight().nandify()));
     }
 
     @Override
     public Expression norify() {
         // OR(A, B) = NOR(NOR(A, B), NOR(A, B))
         return new Nor
-                (new Nor(this.getLeft(), this.getRight())
-                        , new Nor(this.getLeft(), this.getRight()));
+                (new Nor(this.getLeft().norify(), this.getRight().norify())
+                        , new Nor(this.getLeft().norify(), this.getRight().norify()));
     }
 }

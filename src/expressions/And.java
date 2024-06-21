@@ -51,16 +51,15 @@ public class And extends BinaryExpression implements Expression {
 
     @Override
     public Expression nandify() {
-        // TODO: Maybe there is a need to add a recursive call to nandify() for the left and right expressions
         // AND(A,B) = NAND(NAND(A,B),NAND(A,B))
-        return new Nand(new Nand(this.getLeft(), this.getRight()), new Nand(this.getLeft(), this.getRight()));
+        return new Nand(new Nand(this.getLeft().nandify(), this.getRight().nandify()), new Nand(this.getLeft().nandify(), this.getRight().nandify()));
     }
 
     @Override
     public Expression norify() {
         // AND(A, B) = NOR(NOR(A, A), NOR(B, B))
         return new Nor(
-                new Nor(this.getLeft(), this.getLeft()),
-                new Nor(this.getRight(), this.getRight()));
+                new Nor(this.getLeft().norify(), this.getLeft().norify()),
+                new Nor(this.getRight().norify(), this.getRight().norify()));
     }
 }

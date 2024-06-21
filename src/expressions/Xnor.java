@@ -43,15 +43,15 @@ public class Xnor extends BinaryExpression implements Expression {
         // XNOR(A, B) = NAND[ NAND( NAND(A, A), NAND(B, B) ), ( NAND(A, B) ) ]
         return new Nand
                 (new Nand
-                        (new Nand(this.getLeft(), this.getLeft()), new Nand(this.getRight(), this.getRight()))
-                        , new Nand(this.getLeft(), this.getRight()));
+                        (new Nand(this.getLeft().nandify(), this.getLeft().nandify()), new Nand(this.getRight().nandify(), this.getRight().nandify()))
+                        , new Nand(this.getLeft().nandify(), this.getRight().nandify()));
     }
 
     @Override
     public Expression norify() {
         // NAND(A, B) = NOR[NOR( A, NOR(A, B) ), NOR( B, NOR(A, B) )]
         return new Nor
-                (new Nor(this.getLeft(), new Nor(this.getLeft(), this.getRight()))
-                        , new Nor(this.getRight(), new Nor(this.getLeft(), this.getRight())));
+                (new Nor(this.getLeft().norify(), new Nor(this.getLeft().norify(), this.getRight().norify()))
+                        , new Nor(this.getRight().norify(), new Nor(this.getLeft().norify(), this.getRight().norify())));
     }
 }

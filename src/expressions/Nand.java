@@ -48,8 +48,8 @@ public class Nand extends BinaryExpression implements Expression {
         // NAND(A, B) = NOR[NOR(NOR(A, A), NOR(B, B)), NOR(NOR(A, A), NOR(B, B))]
         return new Nor
                 (new Nor
-                        (new Nor(this.getLeft(), this.getLeft()), new Nor(this.getRight(), this.getRight()))
+                        (new Nor(this.getLeft().norify(), this.getLeft().norify()), new Nor(this.getRight().norify(), this.getRight().norify()))
                         , new Nor
-                        (new Nor(this.getLeft(), this.getLeft()), new Nor(this.getRight(), this.getRight())));
+                        (new Nor(this.getLeft().norify(), this.getLeft().norify()), new Nor(this.getRight().norify(), this.getRight().norify())));
     }
 }
