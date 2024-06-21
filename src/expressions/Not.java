@@ -6,7 +6,7 @@ import src.UnaryExpression;
 import java.util.Map;
 
 public class Not extends UnaryExpression implements Expression {
-    private final static String symbol = "∼";
+    private final static String symbol = "~";// "~" or "∼" ????
 
     public Not(Expression expression) {
         super(expression);
