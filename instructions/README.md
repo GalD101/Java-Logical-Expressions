@@ -44,31 +44,35 @@ Assuming we represent each of the atomic expressions as a Class of the same name
 in java using:
 
 ```java
+import src.Expression;
+
 Expression e = new Not(
-                  new Xor(
-                     new And(
+        new Xor(
+                new And(
                         new Val(true),
                         new Or(
-                           new Var("x"),
-                           new Var("y")
+                                new Var("x"),
+                                new Var("y")
                         )
-                     ),
-                     new Var("x")
-                  )
-               );
+                ),
+                new Var("x")
+        )
+);
 ```
 
 The tree is given below:
 
 ![expression tree](tree.svg)
 
-Note that all the nodes in the tree are expressions (according to the `Expression` interface):
+Note that all the nodes in the tree are expressions (according to the `src.Expression` interface):
 
 ![expression tree](etree.svg)
 
 Similarly, we could represent `(x & y) ^ T` as:
 
 ```java
+import src.Expression;
+
 Expression e2 = new Xor(new And(new Var("x"), new Var("y")), new Val(true));
 ```
 
@@ -96,7 +100,7 @@ Once we have an expression, we would like to be able to:
 
 * **Assign values to variables:**
    ```java
-   Expression e3 = e2.assign("y", e2);
+   import src.Expression;Expression e3 = e2.assign("y", e2);
    System.out.println(e3);
    // ((x & ((x & y) ^ T)) ^ T)
    e3 = e3.assign("x", new Val(false));
@@ -104,8 +108,8 @@ Once we have an expression, we would like to be able to:
    // ((F & ((F & y) ^ T)) ^ T)
    ```
 
-  In the first `assign` the variable `y` was assigned the Expression `(x & y) ^ T`, while in the
-  second `assign` the variable `x` was assigned the Expression `False`.
+  In the first `assign` the variable `y` was assigned the src.Expression `(x & y) ^ T`, while in the
+  second `assign` the variable `x` was assigned the src.Expression `False`.
 
 * **Evaluate its value for a given variable assignment to values:** (this example uses a [mapping](Map))
    ```java
@@ -122,36 +126,36 @@ Once we have an expression, we would like to be able to:
 
 ### What you need to implement
 
-In the first part,we begin with a simple interface called `Expression`:
+In the first part,we begin with a simple interface called `src.Expression`:
 
 (this interface uses [generics](Generics) and [map](Map))
 
 ```java
-public interface Expression {
-   // Evaluate the expression using the variable values provided
-   // in the assignment, and return the result. If the expression
-   // contains a variable which is not in the assignment, an exception
-   // is thrown. 
-   Boolean evaluate(Map<String, Boolean> assignment) throws Exception;
+public interface src.Expression {
+  // Evaluate the expression using the variable values provided
+  // in the assignment, and return the result. If the expression
+  // contains a variable which is not in the assignment, an exception
+  // is thrown. 
+  Boolean evaluate(Map<String, Boolean> assignment) throws Exception;
 
-   // A convenience method. Like the `evaluate(assignment)` method above,
-   // but uses an empty assignment.
-   Boolean evaluate() throws Exception;
+  // A convenience method. Like the `evaluate(assignment)` method above,
+  // but uses an empty assignment.
+  Boolean evaluate() throws Exception;
 
-   // Returns a list of the variables in the expression.
-   List<String> getVariables();
+  // Returns a list of the variables in the expression.
+  List<String> getVariables();
 
-   // Returns a nice string representation of the expression.
-   String toString();
+  // Returns a nice string representation of the expression.
+  String toString();
 
-   // Returns a new expression in which all occurrences of the variable
-   // var are replaced with the provided expression (Does not modify the
-   // current expression).
-   Expression assign(String var, Expression expression)
+  // Returns a new expression in which all occurrences of the variable
+  // var are replaced with the provided expression (Does not modify the
+  // current expression).
+  src.Expression assign(String var, src.Expression expression)
 }
 ```
 
-You should write following classes, each of them corresponding to an atomic expression, and each of them should implement the Expression interface.
+You should write following classes, each of them corresponding to an atomic expression, and each of them should implement the src.Expression interface.
 * `Val`, `Var` -- representing truth values and variables.
 * Unary expressions: `Not`.
 * Binary expressions: `And`, `Or`, `Xor`, `Nand`, `Nor`, `Xnor`.
@@ -170,8 +174,8 @@ The string representations are as follows:
 
 `Val` should have a constructor accepting a `Boolean`.
 `Var` should have a constructor accepting a `String`.
-The unary expressions should have a constructor accepting an `Expression`.
-The binary expressions should have a constructor accepting two `Expression`s.
+The unary expressions should have a constructor accepting an `src.Expression`.
+The binary expressions should have a constructor accepting two `src.Expression`s.
 
 The implementation will make heavy use of recursion. For example, in order to evaluate an expression, you need to first evaluate its sub-expressions and then apply some function to the results, with the base cases being the evaluation of the `Var` and `Val` expressions.
 
@@ -193,7 +197,7 @@ Then, go ahead and implement the rest of the expression classes.
 
 ### Test your code
 
-Create a class with a `main` method that creates some nested expressions (for example `Expression e` as defined above) and then prints them, evaluates them, and asks for the variables in them).
+Create a class with a `main` method that creates some nested expressions (for example `src.Expression e` as defined above) and then prints them, evaluates them, and asks for the variables in them).
 
 ## Part 2 -- Nandify and Norify
 
@@ -204,23 +208,32 @@ In this part we will also convert them to logically equal expressions according 
 * [Wikipedia page for Nand Logic]( https://en.wikipedia.org/wiki/NAND_logic)
 * [Wikipedia page for Nor Logic]( https://en.wikipedia.org/wiki/NOR_logic)
 
-Add the following methods to the Expression interface:
+Add the following methods to the src.Expression interface:
+
 ```java
-public interface Expression {
-   // ... as before
-   
-   // Returns the expression tree resulting from converting all the operations to the logical Nand operation.
-   Expression nandify();
-   // Returns the expression tree resulting from converting all the operations to the logical Nor operation.
-   Expression norify();
+public interface src.Expression {
+  // ... as before
+
+  // Returns the expression tree resulting from converting all the operations to the logical Nand operation.
+  src.Expression nandify();
+
+  // Returns the expression tree resulting from converting all the operations to the logical Nor operation.
+  src.Expression norify();
 }
 ``` 
 
 For example:
+
 ```java
-   Expression e = new Xor(new Var("x"), new Var("y"));
-   System.out.println(e.nandify());
-   System.out.println(e.norify());
+   import src.Expression;
+
+Expression e = new Xor(new Var("x"), new Var("y"));
+   System.out.
+
+println(e.nandify());
+        System.out.
+
+println(e.norify());
 // should print:
 // ((x A (x A y)) A (y A (x A y)))
 // (((x V x) V (y V y)) V (x V y))
@@ -232,8 +245,12 @@ Logical expression can be quite messy and contain many "redundant" parts.
 For example:
 
 ```java
+import src.Expression;
+
 Expression e = new Xor(new And(new Var("x"), new Val(false)), new Or(new Var("y"), new Val(false)));
-System.out.println(e);
+System.out.
+
+println(e);
 // the result is:
 // ((x & F) ^ (y | F))
 ```
@@ -241,25 +258,32 @@ System.out.println(e);
 This is correct, but can be really hard to read. We need to "simplify" the expression to make it
 more friendly to humans.
 
-We will add another method to the Expression interface. This method
+We will add another method to the src.Expression interface. This method
 will return a new expression which is a simplified version of the current one.
 
 ```java
-public interface Expression {
-   // ... as before
+public interface src.Expression {
+  // ... as before
 
-   // Returned a simplified version of the current expression.
-   Expression simplify();
+  // Returned a simplified version of the current expression.
+  src.Expression simplify();
 }
 ```
 
 Example usage:
+
 ```java
+import src.Expression;
+
 Expression e = new Xor(new And(new Var("x"), new Val(false)), new Or(new Var("y"), new Val(false)));
-System.out.println(e);
+System.out.
+
+println(e);
 // the result is:
 // ((x & F) ^ (y | F))
-System.out.println(e.simplify());
+System.out.
+
+println(e.simplify());
 // the result is:
 // y
 
@@ -297,7 +321,7 @@ These should be recursive, so that, for example: `And((Xnor(x, x),y)) => y`.
 
 Your code should include at least the following classes, interfaces and abstract classes:
 `Val`, `Var`, `And`, `Or`, `Xor`, `Nand`, `Nor`, `Xnor`, `Not`.
-`Expression`, `BaseExpression`, `BinaryExpression`, `UnaryExpression`.
+`src.Expression`, `BaseExpression`, `BinaryExpression`, `UnaryExpression`.
 
 You should also include a class called `ExpressionsTest` including a `main` method that
 will:
@@ -333,8 +357,13 @@ Each printing should be performed on its own line, do not add extra text, and do
 
 **Question:** Should an expression containing only `Var` or `Val` be printed with or without parentheses?
 **Answer:** For this purpose, in this case:
+
 ```java
+import src.Expression;
+
 Expression e = new Xor(new And(new Var("x"), new Val(false)), new Or(new Var("y"), new Val(false)));
-System.out.println(e);
+System.out.
+
+println(e);
 ```
 The result will be: ((y | F) ^ (x & F))
