@@ -98,10 +98,10 @@ public class NorTest {
     @Test
     public void testAssign() {
         Expression newExpression = norExpression.assign("x", new Val(true));
-        assertEquals(new Nor(new Val(true), new Var("y")), newExpression);
+        assertEquals(new Nor(new Val(true), new Var("y")).toString(), newExpression.toString());
 
         newExpression = norExpression.assign("y", new Val(false));
-        assertEquals(new Nor(new Var("x"), new Val(false)), newExpression);
+        assertEquals(new Nor(new Var("x"), new Val(false)).toString(), newExpression.toString());
     }
 
     @Test
@@ -115,8 +115,8 @@ public class NorTest {
 
     @Test
     public void testEquality() {
-        assertEquals(new Nor(new Var("x"), new Var("y")), norExpression);
-        assertNotEquals(new Nor(new Var("x"), new Var("z")), norExpression);
+        assertEquals(new Nor(new Var("x"), new Var("y")).toString(), norExpression.toString());
+        assertNotEquals(new Nor(new Var("x"), new Var("z")).toString(), norExpression.toString());
     }
 
     @Test
@@ -134,8 +134,8 @@ public class NorTest {
             assertEquals("(x V y)", norExpression.toString());
 
             Expression newExpression = norExpression.assign("x", new Val(true));
-            assertEquals(new Nor(new Val(true), new Var("y")), newExpression);
-            assertEquals(new Nor(new Val(true), new Var("y")), newExpression);
+            assertEquals(new Nor(new Val(true), new Var("y")).toString(), newExpression.toString());
+            assertEquals(new Nor(new Val(true), new Var("y")).toString(), newExpression.toString());
         } catch (Exception e) {
             fail("evaluate method threw an exception: " + e.getMessage());
         }

@@ -55,7 +55,7 @@ public class Or extends BinaryExpression implements Expression {
     }
 
     @Override
-    public Expression simplify() {
+    protected Expression performSimplification() {
         Expression simplifiedLeft = this.getLeft().simplify();
         Expression simplifiedRight = this.getRight().simplify();
 

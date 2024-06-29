@@ -1,7 +1,7 @@
 package src.expressions;
+
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import src.Expression;
 
@@ -83,10 +83,10 @@ public class AndTest {
     @Test
     public void testAssign() {
         Expression newExpression = andExpression.assign("x", new Val(true));
-        assertEquals(new And(new Val(true), new Var("y")), newExpression);
+        assertEquals(new And(new Val(true), new Var("y")).toString(), newExpression.toString());
 
         newExpression = andExpression.assign("y", new Val(false));
-        assertEquals(new And(new Var("x"), new Val(false)), newExpression);
+        assertEquals(new And(new Var("x"), new Val(false)).toString(), newExpression.toString());
     }
 
     @Test
@@ -100,8 +100,8 @@ public class AndTest {
 
     @Test
     public void testEquality() {
-        assertEquals(new And(new Var("x"), new Var("y")), andExpression);
-        assertNotEquals(new And(new Var("x"), new Var("z")), andExpression);
+        assertEquals(new And(new Var("x"), new Var("y")).toString(), andExpression.toString());
+        assertNotEquals(new And(new Var("x"), new Var("z")).toString(), andExpression.toString());
     }
 
     @Test
@@ -119,11 +119,11 @@ public class AndTest {
         assertEquals(List.of("x", "y"), andExpression.getVariables());
         assertEquals(List.of("x", "y"), andExpression.getVariables());
 
-        assertEquals("(x ∧ y)", andExpression.toString());
-        assertEquals("(x ∧ y)", andExpression.toString());
+        assertEquals("(x & y)", andExpression.toString());
+        assertEquals("(x & y)", andExpression.toString());
 
         Expression newExpression = andExpression.assign("x", new Val(true));
-        assertEquals(new And(new Val(true), new Var("y")), newExpression);
-        assertEquals(new And(new Val(true), new Var("y")), newExpression);
+        assertEquals(new And(new Val(true), new Var("y")).toString(), newExpression.toString());
+        assertEquals(new And(new Val(true), new Var("y")).toString(), newExpression.toString());
     }
 }

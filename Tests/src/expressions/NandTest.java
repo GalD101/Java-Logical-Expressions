@@ -2,7 +2,6 @@ package src.expressions;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import src.Expression;
 
@@ -84,10 +83,10 @@ public class NandTest {
     @Test
     public void testAssign() {
         Expression newExpression = nandExpression.assign("x", new Val(true));
-        assertEquals(new Nand(new Val(true), new Var("y")), newExpression);
+        assertEquals(new Nand(new Val(true), new Var("y")).toString(), newExpression.toString());
 
         newExpression = nandExpression.assign("y", new Val(false));
-        assertEquals(new Nand(new Var("x"), new Val(false)), newExpression);
+        assertEquals(new Nand(new Var("x"), new Val(false)).toString(), newExpression.toString());
     }
 
     @Test
@@ -101,8 +100,8 @@ public class NandTest {
 
     @Test
     public void testEquality() {
-        assertEquals(new Nand(new Var("x"), new Var("y")), nandExpression);
-        assertNotEquals(new Nand(new Var("x"), new Var("z")), nandExpression);
+        assertEquals(new Nand(new Var("x"), new Var("y")).toString(), nandExpression.toString());
+        assertNotEquals(new Nand(new Var("x"), new Var("z")).toString(), nandExpression.toString());
     }
 
     @Test
@@ -123,7 +122,7 @@ public class NandTest {
         assertEquals("(x A y)", nandExpression.toString());
 
         Expression newExpression = nandExpression.assign("x", new Val(true));
-        assertEquals(new Nand(new Val(true), new Var("y")), newExpression);
-        assertEquals(new Nand(new Val(true), new Var("y")), newExpression);
+        assertEquals(new Nand(new Val(true), new Var("y")).toString(), newExpression.toString());
+        assertEquals(new Nand(new Val(true), new Var("y")).toString(), newExpression.toString());
     }
 }

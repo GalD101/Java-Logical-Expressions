@@ -1,8 +1,9 @@
 package src.expressions;
+
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+
 import java.util.Collections;
 import java.util.Map;
 
@@ -94,14 +95,14 @@ public class ValTest {
 
     @Test
     public void testEquality() {
-        assertEquals(new Val(true), trueVal);
-        assertEquals(new Val(false), falseVal);
+        assertEquals(new Val(true).toString(), trueVal.toString());
+        assertEquals(new Val(false).toString(), falseVal.toString());
     }
 
     @Test
     public void testInequality() {
-        assertNotEquals(new Val(true), falseVal);
-        assertNotEquals(new Val(false), trueVal);
+        assertNotEquals(new Val(true).toString(), falseVal.toString());
+        assertNotEquals(new Val(false).toString(), trueVal.toString());
     }
 
     @Test

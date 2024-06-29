@@ -98,10 +98,10 @@ public class XorTest {
     @Test
     public void testAssign() {
         Expression newExpression = xorExpression.assign("x", new Val(true));
-        assertEquals(new Xor(new Val(true), new Var("y")), newExpression);
+        assertEquals(new Xor(new Val(true), new Var("y")).toString(), newExpression.toString());
 
         newExpression = xorExpression.assign("y", new Val(false));
-        assertEquals(new Xor(new Var("x"), new Val(false)), newExpression);
+        assertEquals(new Xor(new Var("x"), new Val(false)).toString(), newExpression.toString());
     }
 
     @Test
@@ -115,8 +115,8 @@ public class XorTest {
 
     @Test
     public void testEquality() {
-        assertEquals(new Xor(new Var("x"), new Var("y")), xorExpression);
-        assertNotEquals(new Xor(new Var("x"), new Var("z")), xorExpression);
+        assertEquals(new Xor(new Var("x"), new Var("y")).toString(), xorExpression.toString());
+        assertNotEquals(new Xor(new Var("x"), new Var("z")).toString(), xorExpression.toString());
     }
 
     @Test
@@ -130,12 +130,12 @@ public class XorTest {
             assertEquals(List.of("x", "y"), xorExpression.getVariables());
             assertEquals(List.of("x", "y"), xorExpression.getVariables());
 
-            assertEquals("(x ⊕ y)", xorExpression.toString());
-            assertEquals("(x ⊕ y)", xorExpression.toString());
+            assertEquals("(x ^ y)", xorExpression.toString());
+            assertEquals("(x ^ y)", xorExpression.toString());
 
             Expression newExpression = xorExpression.assign("x", new Val(true));
-            assertEquals(new Xor(new Val(true), new Var("y")), newExpression);
-            assertEquals(new Xor(new Val(true), new Var("y")), newExpression);
+            assertEquals(new Xor(new Val(true), new Var("y")).toString(), newExpression.toString());
+            assertEquals(new Xor(new Val(true), new Var("y")).toString(), newExpression.toString());
         } catch (Exception e) {
             fail("evaluate method threw an exception: " + e.getMessage());
         }

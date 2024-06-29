@@ -60,7 +60,7 @@ public class Not extends UnaryExpression implements Expression {
     }
 
     @Override
-    public Expression simplify() {
+    protected Expression performSimplification() {
         Expression simplifiedExpression = this.getExpression().simplify();
         return new Not(simplifiedExpression);
     }
