@@ -3,9 +3,6 @@ package src.expressions;
 import src.BinaryExpression;
 import src.Expression;
 
-import java.util.List;
-import java.util.Map;
-
 public class Or extends BinaryExpression implements Expression {
     private final static String symbol = "|";
 

@@ -3,8 +3,6 @@ package src.expressions;
 import src.BinaryExpression;
 import src.Expression;
 
-import java.util.Map;
-
 public class Nor extends BinaryExpression implements Expression {
     private final static String symbol = "V";
 

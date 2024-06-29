@@ -10,7 +10,6 @@ public abstract class UnaryExpression extends BaseExpression {
         this.expression = expression;
     }
 
-    // TODO: Check this
     protected Expression getExpression() {
         return this.expression;
     }
@@ -21,4 +20,18 @@ public abstract class UnaryExpression extends BaseExpression {
         variables.addAll(this.expression.getVariables());
         return variables;
     }
+
+    @Override
+    public Expression assign(String var, Expression expression) {
+        List<String> variables = this.getVariables();
+        if (!variables.contains(var)) {
+            // nothing to replace
+            return this.createNewInstance(this.getExpression());
+        }
+
+        // Replace the var with the expression
+        return this.createNewInstance(this.getExpression().assign(var, expression));
+    }
+
+    protected abstract Expression createNewInstance(Expression expression);
 }

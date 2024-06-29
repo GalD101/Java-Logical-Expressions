@@ -1,5 +1,7 @@
 package src;
 
+import src.expressions.Val;
+
 import java.util.Map;
 
 // TODO: Maybe also implement a new interface for getOperatorSymbol
@@ -11,6 +13,5 @@ public abstract class BaseExpression implements Expression {
         return this.evaluate(assignment);
     }
 
-    // TODO: Maybe remove this?
     protected abstract String getOperatorSymbol();
 }

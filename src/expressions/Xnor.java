@@ -3,9 +3,6 @@ package src.expressions;
 import src.BinaryExpression;
 import src.Expression;
 
-import java.util.List;
-import java.util.Map;
-
 public class Xnor extends BinaryExpression implements Expression {
     private final static String symbol = "#";
 
@@ -47,15 +44,6 @@ public class Xnor extends BinaryExpression implements Expression {
 
     @Override
     public Expression simplify() {
-        // TODO: This is something all the simplify functions should do
-        if (this.getVariables().isEmpty()) {
-            try {
-                return new Val(this.evaluate());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
         Expression simplifiedLeft = this.getLeft().simplify();
         Expression simplifiedRight = this.getRight().simplify();
 

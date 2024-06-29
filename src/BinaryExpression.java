@@ -38,12 +38,8 @@ public abstract class BinaryExpression extends BaseExpression implements Express
         }
 
         // Replace the var with the expression
-        return createNewInstance(this.getLeft().assign(var, expression), this.getRight().assign(var, expression));
+        return this.createNewInstance(this.getLeft().assign(var, expression), this.getRight().assign(var, expression));
     }
-
-    protected abstract BinaryExpression createNewInstance(Expression left, Expression right);
-
-    protected abstract Boolean evaluateOperation(Boolean leftEvaluation, Boolean rightEvaluation);
 
     @Override
     public List<String> getVariables() {
@@ -57,4 +53,8 @@ public abstract class BinaryExpression extends BaseExpression implements Express
     public String toString() {
         return "(" + this.left.toString() + " " + this.getOperatorSymbol() + " " + this.right.toString() + ")";
     }
+
+    protected abstract BinaryExpression createNewInstance(Expression left, Expression right);
+
+    protected abstract Boolean evaluateOperation(Boolean leftEvaluation, Boolean rightEvaluation);
 }

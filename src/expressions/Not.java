@@ -28,7 +28,6 @@ public class Not extends UnaryExpression implements Expression {
     }
 
     @Override
-    // TODO: Figure out how to do parenthesis correctly
     public String toString() {
         if ('(' == (this.getExpression().toString().charAt(0))) {
             return symbol + this.getExpression().toString();
@@ -52,5 +51,10 @@ public class Not extends UnaryExpression implements Expression {
     public Expression simplify() {
         Expression simplifiedExpression = this.getExpression().simplify();
         return new Not(simplifiedExpression);
+    }
+
+    @Override
+    protected Expression createNewInstance(Expression expression) {
+        return new Not(expression);
     }
 }
