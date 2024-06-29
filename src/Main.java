@@ -54,7 +54,8 @@ public class Main {
                         new Or(new Var("x"), new Var("y")),
                         new Xor(new Val(true), new Var("z")))));
         System.out.println(e);
-        System.out.println("Should print: ((x A F) # ~((x v y) ∧ (T ⊕ z)))\n");
+        // TODO: Too many parenthesis in not :(
+        System.out.println("Should print: ((x A F) # ~((x | y) ∧ (T ^ z)))\n");
 
 //        System.out.println("After simplification: " + e.simplify());
 //        System.out.println("Should print: ~(((x v y) ^ ~(z)))\n");

@@ -86,7 +86,7 @@ public class XorTest {
 
     @Test
     public void testToString() {
-        assertEquals("(x ⊕ y)", xorExpression.toString());
+        assertEquals("(x ^ y)", xorExpression.toString());
     }
 
     @Test

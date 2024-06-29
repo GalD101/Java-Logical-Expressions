@@ -71,7 +71,7 @@ public class AndTest {
 
     @Test
     public void testToString() {
-        assertEquals("(x ∧ y)", andExpression.toString());
+        assertEquals("(x & y)", andExpression.toString());
     }
 
     @Test

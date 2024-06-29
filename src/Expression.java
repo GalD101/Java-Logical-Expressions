@@ -33,4 +33,6 @@ public interface Expression {
     // logical Nor operation.
     Expression norify();
 
+    // Returned a simplified version of the current expression.
+    Expression simplify();
 }

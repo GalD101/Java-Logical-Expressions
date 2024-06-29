@@ -3,7 +3,6 @@ package src.expressions;
 import src.BinaryExpression;
 import src.Expression;
 
-import java.util.List;
 import java.util.Map;
 
 public class Nor extends BinaryExpression implements Expression {
@@ -14,23 +13,13 @@ public class Nor extends BinaryExpression implements Expression {
     }
 
     @Override
-    public Boolean evaluate(Map<String, Boolean> assignment) throws Exception {
-        return new Not(new Or(this.getLeft(), this.getRight())).evaluate(assignment);
+    public Boolean evaluateOperation(Boolean leftEvaluation, Boolean rightEvaluation) {
+        return !(leftEvaluation || rightEvaluation);
     }
 
     @Override
-    public Boolean evaluate() throws Exception {
-        return new Not(new Or(this.getLeft(), this.getRight())).evaluate();
-    }
-
-    @Override
-    public Expression assign(String var, Expression expression) {
-        List<String> variables = this.getVariables();
-        if (!variables.contains(var)) { // nothing to replace - breaks the recursion TODO: I think this is redundant so I only need to do it once because I think I already check this in the other implementations
-            return new Not(new Or(this.getLeft(), this.getRight())); // Breaks the recursion
-        }
-
-        return new Not(new Or(this.getLeft().assign(var, expression), this.getRight().assign(var, expression)));
+    protected BinaryExpression createNewInstance(Expression left, Expression right) {
+        return new Nor(left, right);
     }
 
     @Override
@@ -51,5 +40,26 @@ public class Nor extends BinaryExpression implements Expression {
     @Override
     public Expression norify() {
         return new Nor(this.getLeft().norify(), this.getRight().norify());
+    }
+
+    @Override
+    public Expression simplify() {
+        Expression simplifiedLeft = this.getLeft().simplify();
+        Expression simplifiedRight = this.getRight().simplify();
+
+        if (simplifiedLeft.toString().equals("T") || simplifiedRight.toString().equals("T")) {
+            return new Val(false);
+        }
+        if (simplifiedLeft.toString().equals("F")) {
+            return new Not(simplifiedRight);
+        }
+        if (simplifiedRight.toString().equals("F")) {
+            return new Not(simplifiedLeft);
+        }
+        if (simplifiedLeft.toString().equals(simplifiedRight.toString())) {
+            return new Not(simplifiedLeft);
+        }
+
+        return new Nor(simplifiedLeft, simplifiedRight);
     }
 }

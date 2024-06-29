@@ -20,8 +20,6 @@ public class ExpressionOutput {
                 new Not(new And(new Or(x, y),
                         new Xor(new Val(true), z))));
 
-        System.out.println(ex.toString());
-
         HashMap<String, Boolean> map = new HashMap<>();
         map.put("x", true);
         map.put("y", false);
@@ -34,6 +32,6 @@ public class ExpressionOutput {
 
         System.out.println(ex.nandify().toString());
         System.out.println(ex.norify().toString());
-//        System.out.println(ex.simplify().toString());
+        System.out.println(ex.simplify().toString());
     }
 }

@@ -7,36 +7,20 @@ import java.util.List;
 import java.util.Map;
 
 public class Or extends BinaryExpression implements Expression {
-    private final static String symbol = "∨";
+    private final static String symbol = "|";
 
     public Or(Expression left, Expression right) {
         super(left, right);
     }
 
     @Override
-    public Boolean evaluate(Map<String, Boolean> assignment) throws Exception {
-        if (assignment == null) throw new Exception("Null assignment");
-//        if (!assignment.containsKey(this.getLeft().toString()) || !assignment.containsKey(this.getRight().toString())) throw new Exception("Missing assignment");
-        // In order to avoid short-circuiting, we need to evaluate both sides
-        Boolean leftEvaluation = this.getLeft().evaluate(assignment);
-        Boolean rightEvaluation = this.getRight().evaluate(assignment);
+    public Boolean evaluateOperation(Boolean leftEvaluation, Boolean rightEvaluation) {
         return leftEvaluation || rightEvaluation;
     }
 
     @Override
-    public Boolean evaluate() throws Exception {
-        return this.getLeft().evaluate() || this.getRight().evaluate();
-    }
-
-    @Override
-    public Expression assign(String var, Expression expression) {
-        List<String> variables = this.getVariables();
-        if (!variables.contains(var)) { // nothing to replace - breaks the recursion TODO: I think this is redundant so I only need to do it once because I think I already check this in the other implementations
-            return new Or(this.getLeft(), this.getRight()); // Breaks the recursion
-        }
-
-        // TODO: Maybe needs to change because maybe it will cause infinite recursion
-        return new Or(this.getLeft().assign(var, expression), this.getRight().assign(var, expression));
+    protected BinaryExpression createNewInstance(Expression left, Expression right) {
+        return new Or(left, right);
     }
 
     @Override
@@ -56,5 +40,26 @@ public class Or extends BinaryExpression implements Expression {
         return new Nor
                 (new Nor(this.getLeft().norify(), this.getRight().norify())
                         , new Nor(this.getLeft().norify(), this.getRight().norify()));
+    }
+
+    @Override
+    public Expression simplify() {
+        Expression simplifiedLeft = this.getLeft().simplify();
+        Expression simplifiedRight = this.getRight().simplify();
+
+        if (simplifiedLeft.toString().equals("T") || simplifiedRight.toString().equals("T")) {
+            return new Val(true);
+        }
+        if (simplifiedLeft.toString().equals("F")) {
+            return simplifiedRight;
+        }
+        if (simplifiedRight.toString().equals("F")) {
+            return simplifiedLeft;
+        }
+        if (simplifiedLeft.toString().equals(simplifiedRight.toString())) {
+            return simplifiedLeft;
+        }
+
+        return new Or(simplifiedLeft, simplifiedRight);
     }
 }

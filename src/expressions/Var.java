@@ -23,7 +23,7 @@ public class Var implements Expression {
             throw new NoSuchElementException("Variable not found in assignment");// this.evaluate(); // TODO: Check this
         }
 
-        return assignment.get(this.name); // Breaks recursion
+        return assignment.get(this.name);
     }
 
     @Override
@@ -75,6 +75,11 @@ public class Var implements Expression {
 
     @Override
     public Expression norify() {
+        return this;
+    }
+
+    @Override
+    public Expression simplify() {
         return this;
     }
 //

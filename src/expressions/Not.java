@@ -6,15 +6,10 @@ import src.UnaryExpression;
 import java.util.Map;
 
 public class Not extends UnaryExpression implements Expression {
-    private final static String symbol = "~";// "~" or "∼" ????
+    private final static String symbol = "~";
 
     public Not(Expression expression) {
         super(expression);
-    }
-
-    @Override
-    public Boolean evaluate() throws Exception {
-        return !this.getExpression().evaluate();
     }
 
     @Override
@@ -35,6 +30,9 @@ public class Not extends UnaryExpression implements Expression {
     @Override
     // TODO: Figure out how to do parenthesis correctly
     public String toString() {
+        if ('(' == (this.getExpression().toString().charAt(0))) {
+            return symbol + this.getExpression().toString();
+        }
         return symbol + "(" + this.getExpression().toString() + ")";
     }
 
@@ -48,5 +46,11 @@ public class Not extends UnaryExpression implements Expression {
     public Expression norify() {
         // NOT(A) = NOR(A, A)
         return new Nor(this.getExpression().norify(), this.getExpression().norify());
+    }
+
+    @Override
+    public Expression simplify() {
+        Expression simplifiedExpression = this.getExpression().simplify();
+        return new Not(simplifiedExpression);
     }
 }

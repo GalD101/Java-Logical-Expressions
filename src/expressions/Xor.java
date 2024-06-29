@@ -3,34 +3,23 @@ package src.expressions;
 import src.BinaryExpression;
 import src.Expression;
 
-import java.util.List;
 import java.util.Map;
 
 public class Xor extends BinaryExpression implements Expression {
-    private final static String symbol = "⊕";
+    private final static String symbol = "^";
 
     public Xor(Expression left, Expression right) {
         super(left, right);
     }
 
     @Override
-    public Boolean evaluate() throws Exception {
-        return this.getLeft().evaluate() ^ this.getRight().evaluate();
+    public Boolean evaluateOperation(Boolean leftEvaluation, Boolean rightEvaluation) {
+        return leftEvaluation ^ rightEvaluation;
     }
 
     @Override
-    public Boolean evaluate(Map<String, Boolean> assignment) throws Exception {
-        return this.getLeft().evaluate(assignment) ^ this.getRight().evaluate(assignment);
-    }
-
-    @Override
-    public Expression assign(String var, Expression expression) {
-        List<String> variables = this.getVariables();
-        if (!variables.contains(var)) { // nothing to replace - breaks the recursion TODO: I think this is redundant so I only need to do it once because I think I already check this in the other implementations
-            return new Xor(this.getLeft(), this.getRight()); // Breaks the recursion
-        }
-
-        return new Xor(this.getLeft().assign(var, expression), this.getRight().assign(var, expression));
+    protected BinaryExpression createNewInstance(Expression left, Expression right) {
+        return new Xor(left, right);
     }
 
     @Override
@@ -53,5 +42,29 @@ public class Xor extends BinaryExpression implements Expression {
                 (new Nor
                         (new Nor(this.getLeft().norify(), this.getLeft().norify()), new Nor(this.getRight().norify(), this.getRight().norify()))
                         , new Nor(this.getLeft().norify(), this.getRight().norify()));
+    }
+
+    @Override
+    public Expression simplify() {
+        Expression simplifiedLeft = this.getLeft().simplify();
+        Expression simplifiedRight = this.getRight().simplify();
+
+        if (simplifiedLeft.toString().equals("T")) {
+            return new Not(simplifiedRight);
+        }
+        if (simplifiedRight.toString().equals("T")) {
+            return new Not(simplifiedLeft);
+        }
+        if (simplifiedLeft.toString().equals("F")) {
+            return simplifiedRight;
+        }
+        if (simplifiedRight.toString().equals("F")) {
+            return simplifiedLeft;
+        }
+        if (simplifiedLeft.toString().equals(simplifiedRight.toString())) {
+            return new Val(false);
+        }
+
+        return new Xor(simplifiedLeft, simplifiedRight);
     }
 }

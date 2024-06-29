@@ -37,6 +37,18 @@ public class Val implements Expression {
         }
     }
 
+    @Override
+//    public boolean equals(Object other) {
+//        if (other == null) {
+//            return false;
+//        }
+//        if (other instanceof Val) {
+//            // NOT GOOD
+//            return this.value == ((Val) other).value;
+//        }
+//        return false;
+//    }
+
     // Returns a new expression in which all occurrences of the variable
     // var are replaced with the provided expression (Does not modify the
     // current expression). // TODO: Check if this is correct
@@ -53,6 +65,11 @@ public class Val implements Expression {
 
     @Override
     public Expression norify() {
+        return this;
+    }
+
+    @Override
+    public Expression simplify() {
         return this;
     }
 }
