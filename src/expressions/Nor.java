@@ -3,9 +3,22 @@ package src.expressions;
 import src.BinaryExpression;
 import src.Expression;
 
+/**
+ * The Nor class extends the BinaryExpression class and implements the Expression interface.
+ * It represents a logical NOR operation in the form of an expression.
+ * The symbol for the NOR operation is represented by the "V" character.
+ */
 public class Nor extends BinaryExpression implements Expression {
-    private final static String symbol = "V";
+    private final String symbol = "V";
 
+    /**
+     * Constructs a new Nor object.
+     * This constructor initializes a new Nor object with the given left and right Expressions.
+     * The Nor object represents a logical NOR operation between the two expressions.
+     *
+     * @param left  The left operand of the NOR operation.
+     * @param right The right operand of the NOR operation.
+     */
     public Nor(Expression left, Expression right) {
         super(left, right);
     }
@@ -28,11 +41,13 @@ public class Nor extends BinaryExpression implements Expression {
     @Override
     public Expression nandify() {
         // NOR(A, B) = NAND[ NAND( NAND(A, A), NAND(B, B) ) , NAND(NAND(A, A) , NAND(B, B) ) ]
-        return new Nand
-                (new Nand
-                        (new Nand(this.getLeft().nandify(), this.getLeft().nandify()), new Nand(this.getRight().nandify(), this.getRight().nandify()))
-                        , new Nand
-                        (new Nand(this.getLeft().nandify(), this.getLeft().nandify()), new Nand(this.getRight().nandify(), this.getRight().nandify())));
+        return new Nand(
+                new Nand(
+                        new Nand(this.getLeft().nandify(), this.getLeft().nandify()),
+                        new Nand(this.getRight().nandify(), this.getRight().nandify())),
+                new Nand(
+                        new Nand(this.getLeft().nandify(), this.getLeft().nandify()),
+                        new Nand(this.getRight().nandify(), this.getRight().nandify())));
     }
 
     @Override

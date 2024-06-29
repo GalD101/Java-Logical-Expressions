@@ -3,9 +3,22 @@ package src.expressions;
 import src.BinaryExpression;
 import src.Expression;
 
+/**
+ * The Nand class extends the BinaryExpression class and implements the Expression interface.
+ * It represents a logical NAND operation in the form of an expression.
+ * The symbol for the NAND operation is represented by the "A" character.
+ */
 public class Nand extends BinaryExpression implements Expression {
-    private final static String symbol = "A";
+    private final String symbol = "A";
 
+    /**
+     * Constructs a new Nand object.
+     * This constructor initializes a new Nand object with the given left and right Expressions.
+     * The Nand object represents a logical NAND operation between the two expressions.
+     *
+     * @param left  The left operand of the NAND operation.
+     * @param right The right operand of the NAND operation.
+     */
     public Nand(Expression left, Expression right) {
         super(left, right);
     }
@@ -33,11 +46,13 @@ public class Nand extends BinaryExpression implements Expression {
     @Override
     public Expression norify() {
         // NAND(A, B) = NOR[NOR(NOR(A, A), NOR(B, B)), NOR(NOR(A, A), NOR(B, B))]
-        return new Nor
-                (new Nor
-                        (new Nor(this.getLeft().norify(), this.getLeft().norify()), new Nor(this.getRight().norify(), this.getRight().norify()))
-                        , new Nor
-                        (new Nor(this.getLeft().norify(), this.getLeft().norify()), new Nor(this.getRight().norify(), this.getRight().norify())));
+        return new Nor(
+                new Nor(
+                        new Nor(this.getLeft().norify(), this.getLeft().norify()),
+                        new Nor(this.getRight().norify(), this.getRight().norify())),
+                new Nor(
+                        new Nor(this.getLeft().norify(), this.getLeft().norify()),
+                        new Nor(this.getRight().norify(), this.getRight().norify())));
     }
 
     @Override

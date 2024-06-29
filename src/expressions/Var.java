@@ -7,9 +7,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+/**
+ * The Var class implements the Expression interface.
+ * It represents a variable in the form of an expression.
+ * The variable is stored as a String name in the Var object.
+ * The Var class provides methods to evaluate the variable, get variables, convert the variable to a string,
+ * assign an expression to a variable, and simplify the expression.
+ */
 public class Var implements Expression {
     private String name;
 
+    /**
+     * Constructs a new Var object.
+     * This constructor initializes a new Var object with the given String name.
+     * If the provided name is null, an IllegalArgumentException is thrown.
+     *
+     * @param name The name of the variable to be stored in the Var object. Must be a non-null String.
+     * @throws IllegalArgumentException if the provided name is null.
+     */
     public Var(String name) {
         if (name == null) {
             throw new IllegalArgumentException("Value cannot be null - must be a String");

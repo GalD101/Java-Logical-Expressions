@@ -1,5 +1,13 @@
 package src;
-import src.expressions.*;
+
+import src.expressions.Nand;
+import src.expressions.Val;
+import src.expressions.Var;
+import src.expressions.Xnor;
+import src.expressions.Not;
+import src.expressions.And;
+import src.expressions.Xor;
+import src.expressions.Or;
 
 import java.util.HashMap;
 
@@ -10,9 +18,10 @@ public class ExpressionOutput {
 
     /**
      * Main which runs code.
+     *
      * @param args relevant
      */
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         Expression x = new Var("x");
         Expression y = new Var("y");
         Expression z = new Var("z");

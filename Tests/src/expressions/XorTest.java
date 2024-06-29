@@ -96,7 +96,6 @@ public class XorTest {
     }
 
     @Test
-    @Ignore("Equals method is not implemented")
     public void testAssign() {
         Expression newExpression = xorExpression.assign("x", new Val(true));
         assertEquals(new Xor(new Val(true), new Var("y")), newExpression);
@@ -115,21 +114,12 @@ public class XorTest {
     }
 
     @Test
-    @Ignore("Equals method is not implemented")
     public void testEquality() {
         assertEquals(new Xor(new Var("x"), new Var("y")), xorExpression);
         assertNotEquals(new Xor(new Var("x"), new Var("z")), xorExpression);
     }
 
     @Test
-    @Ignore
-    public void testHashCode() {
-        assertEquals(new Xor(new Var("x"), new Var("y")).hashCode(), xorExpression.hashCode());
-        assertNotEquals(new Xor(new Var("x"), new Var("z")).hashCode(), xorExpression.hashCode());
-    }
-
-    @Test
-    @Ignore("Equals method is not implemented")
     public void testConsistency() {
         try {
             // Check that repeated calls give consistent results

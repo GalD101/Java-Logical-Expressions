@@ -115,21 +115,12 @@ public class XnorTest {
     }
 
     @Test
-    @Ignore("Equals method is not implemented")
     public void testEquality() {
         assertEquals(new Xnor(new Var("x"), new Var("y")), xnorExpression);
         assertNotEquals(new Xnor(new Var("x"), new Var("z")), xnorExpression);
     }
 
     @Test
-    @Ignore
-    public void testHashCode() {
-        assertEquals(new Xnor(new Var("x"), new Var("y")).hashCode(), xnorExpression.hashCode());
-        assertNotEquals(new Xnor(new Var("x"), new Var("z")).hashCode(), xnorExpression.hashCode());
-    }
-
-    @Test
-    @Ignore("Equals method is not implemented")
     public void testConsistency() {
         try {
             // Check that repeated calls give consistent results

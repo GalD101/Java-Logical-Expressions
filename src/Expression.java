@@ -62,7 +62,8 @@ public interface Expression {
 
     /**
      * Returns the expression tree resulting from converting all the operations to the logical Nand operation.
-     * This method is used to transform the current expression into a new expression where all operations are replaced by Nand operations.
+     * This method is used to transform the current expression
+     * into a new expression where all operations are replaced by Nand operations.
      * The original expression is not modified.
      *
      * @return A new Expression where all operations have been replaced by Nand operations.
@@ -71,7 +72,8 @@ public interface Expression {
 
     /**
      * Returns the expression tree resulting from converting all the operations to the logical Nor operation.
-     * This method is used to transform the current expression into a new expression where all operations are replaced by Nor operations.
+     * This method is used to transform the current expression
+     * into a new expression where all operations are replaced by Nor operations.
      * The original expression is not modified.
      *
      * @return A new Expression where all operations have been replaced by Nor operations.

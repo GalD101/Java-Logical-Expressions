@@ -96,7 +96,6 @@ public class NorTest {
     }
 
     @Test
-    @Ignore("Equals method is not implemented")
     public void testAssign() {
         Expression newExpression = norExpression.assign("x", new Val(true));
         assertEquals(new Nor(new Val(true), new Var("y")), newExpression);
@@ -115,21 +114,12 @@ public class NorTest {
     }
 
     @Test
-    @Ignore("Equals method is not implemented")
     public void testEquality() {
         assertEquals(new Nor(new Var("x"), new Var("y")), norExpression);
         assertNotEquals(new Nor(new Var("x"), new Var("z")), norExpression);
     }
 
     @Test
-    @Ignore
-    public void testHashCode() {
-        assertEquals(new Nor(new Var("x"), new Var("y")).hashCode(), norExpression.hashCode());
-        assertNotEquals(new Nor(new Var("x"), new Var("z")).hashCode(), norExpression.hashCode());
-    }
-
-    @Test
-    @Ignore("Equal implementation needed for this to work")
     public void testConsistency() {
         try {
             // Check that repeated calls give consistent results

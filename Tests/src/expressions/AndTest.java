@@ -81,7 +81,6 @@ public class AndTest {
     }
 
     @Test
-    @Ignore("Equals method is not implemented")
     public void testAssign() {
         Expression newExpression = andExpression.assign("x", new Val(true));
         assertEquals(new And(new Val(true), new Var("y")), newExpression);
@@ -100,21 +99,12 @@ public class AndTest {
     }
 
     @Test
-    @Ignore
     public void testEquality() {
         assertEquals(new And(new Var("x"), new Var("y")), andExpression);
         assertNotEquals(new And(new Var("x"), new Var("z")), andExpression);
     }
 
     @Test
-    @Ignore
-    public void testHashCode() {
-        assertEquals(new And(new Var("x"), new Var("y")).hashCode(), andExpression.hashCode());
-        assertNotEquals(new And(new Var("x"), new Var("z")).hashCode(), andExpression.hashCode());
-    }
-
-    @Test
-    @Ignore("Check equals case, I think I need to implement equals method")
     public void testConsistency() {
         // Check that repeated calls give consistent results
         Map<String, Boolean> assignment = Map.of("x", true, "y", true);

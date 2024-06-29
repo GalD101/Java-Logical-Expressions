@@ -5,9 +5,21 @@ import src.UnaryExpression;
 
 import java.util.Map;
 
+/**
+ * The Not class extends the UnaryExpression class and implements the Expression interface.
+ * It represents a logical NOT operation in the form of an expression.
+ * The symbol for the NOT operation is represented by the "~" character.
+ */
 public class Not extends UnaryExpression implements Expression {
-    private final static String symbol = "~";
+    private final String symbol = "~";
 
+    /**
+     * Constructs a new Not object.
+     * This constructor initializes a new Not object with the given Expression.
+     * The Not object represents a logical NOT operation on the expression.
+     *
+     * @param expression The operand of the NOT operation.
+     */
     public Not(Expression expression) {
         super(expression);
     }

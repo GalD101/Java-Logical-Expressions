@@ -82,7 +82,6 @@ public class NandTest {
     }
 
     @Test
-    @Ignore("Equal method is not implemented yet")
     public void testAssign() {
         Expression newExpression = nandExpression.assign("x", new Val(true));
         assertEquals(new Nand(new Val(true), new Var("y")), newExpression);
@@ -101,21 +100,12 @@ public class NandTest {
     }
 
     @Test
-    @Ignore("Equals method is not implemented yet")
     public void testEquality() {
         assertEquals(new Nand(new Var("x"), new Var("y")), nandExpression);
         assertNotEquals(new Nand(new Var("x"), new Var("z")), nandExpression);
     }
 
     @Test
-    @Ignore
-    public void testHashCode() {
-        assertEquals(new Nand(new Var("x"), new Var("y")).hashCode(), nandExpression.hashCode());
-        assertNotEquals(new Nand(new Var("x"), new Var("z")).hashCode(), nandExpression.hashCode());
-    }
-
-    @Test
-    @Ignore("Check equals case, I think I need to implement equals method")
     public void testConsistency() {
         // Check that repeated calls give consistent results
         Map<String, Boolean> assignment = Map.of("x", true, "y", true);

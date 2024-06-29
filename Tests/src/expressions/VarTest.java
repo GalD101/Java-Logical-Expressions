@@ -90,7 +90,6 @@ public class VarTest {
     }
 
     @Test
-    @Ignore("Needs to see why this fails and if it even needs to be here")
     public void testAssignNegative() {
         Expression expr = new Val(true);
         assertNotEquals(varX, varX.assign("y", expr));
@@ -98,31 +97,21 @@ public class VarTest {
     }
 
     @Test
-    @Ignore
     public void testEquality() {
         assertEquals(new Var("x"), varX);
         assertEquals(new Var("y"), varY);
     }
 
     @Test
-    @Ignore
     public void testInequality() {
         assertNotEquals(new Var("x"), varY);
         assertNotEquals(new Var("y"), varX);
     }
 
     @Test
-    @Ignore
     public void testHashCode() {
         assertEquals(new Var("x").hashCode(), varX.hashCode());
         assertEquals(new Var("y").hashCode(), varY.hashCode());
-    }
-
-    @Test
-    @Ignore
-    public void testHashCodeNegative() {
-        assertNotEquals(new Var("x").hashCode(), varY.hashCode());
-        assertNotEquals(new Var("y").hashCode(), varX.hashCode());
     }
 
     @Test

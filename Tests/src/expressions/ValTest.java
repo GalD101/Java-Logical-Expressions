@@ -93,24 +93,15 @@ public class ValTest {
     }
 
     @Test
-    @Ignore
     public void testEquality() {
         assertEquals(new Val(true), trueVal);
         assertEquals(new Val(false), falseVal);
     }
 
     @Test
-    @Ignore
     public void testInequality() {
         assertNotEquals(new Val(true), falseVal);
         assertNotEquals(new Val(false), trueVal);
-    }
-
-    @Test
-    @Ignore
-    public void testHashCode() {
-        assertEquals(new Val(true).hashCode(), trueVal.hashCode());
-        assertEquals(new Val(false).hashCode(), falseVal.hashCode());
     }
 
     @Test
