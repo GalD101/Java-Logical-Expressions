@@ -66,7 +66,7 @@ public class Xnor extends BinaryExpression implements Expression {
         Expression simplifiedRight = this.getRight().simplify();
 
         if (simplifiedLeft.toString().equals(simplifiedRight.toString())) {
-            return simplifiedLeft;
+            return new Val(true);
         }
 
         return new Xnor(simplifiedLeft, simplifiedRight);

@@ -112,7 +112,7 @@ public class NotTest {
     @Test
     public void testToStringComplexExpression() {
         Not notExpr = new Not(new Or(new And(new Var("x"), new Var("y")), new Var("z")));
-        assertEquals("~((x & y) | z)", notExpr.toString());
+        assertEquals("~(((x & y) | z))", notExpr.toString());
     }
 
     @Test
