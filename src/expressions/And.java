@@ -9,7 +9,6 @@ import src.Expression;
  * The symbol for the AND operation is represented by the "&" character.
  */
 public class And extends BinaryExpression implements Expression {
-    private final String symbol = "&";
 
     /**
      * Constructs a new And object.
@@ -35,7 +34,7 @@ public class And extends BinaryExpression implements Expression {
 
     @Override
     protected String getOperatorSymbol() {
-        return symbol;
+        return "&";
     }
 
     @Override

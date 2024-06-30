@@ -6,8 +6,10 @@ import java.util.Map;
 
 /**
  * The BaseExpression class is an abstract class that implements the Expression interface.
- * It provides a default implementation for the evaluate() method, which evaluates the expression using an empty assignment.
- * The getOperatorSymbol() method is declared as abstract and must be implemented by any class that extends BaseExpression.
+ * It provides a default implementation for the evaluate() method,
+ * which evaluates the expression using an empty assignment.
+ * The getOperatorSymbol() method is declared as abstract
+ * and must be implemented by any class that extends BaseExpression.
  */
 public abstract class BaseExpression implements Expression {
 
@@ -28,7 +30,6 @@ public abstract class BaseExpression implements Expression {
             }
             return this.performSimplification();
         } catch (Exception e) {
-            e.printStackTrace();
             return this; // Return the current expression if simplification fails
         }
     }

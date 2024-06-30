@@ -9,8 +9,6 @@ import src.Expression;
  * The symbol for the OR operation is represented by the "|" character.
  */
 public class Or extends BinaryExpression implements Expression {
-    private final String symbol = "|";
-
     /**
      * Constructs a new Or object.
      * This constructor initializes a new Or object with the given left and right Expressions.
@@ -35,7 +33,7 @@ public class Or extends BinaryExpression implements Expression {
 
     @Override
     protected String getOperatorSymbol() {
-        return symbol;
+        return "|";
     }
 
     @Override

@@ -14,8 +14,8 @@ import java.util.Map;
  * It also provides abstract methods to create a new instance of a BinaryExpression and evaluate the binary operation.
  */
 public abstract class BinaryExpression extends BaseExpression implements Expression {
-    private Expression left;
-    private Expression right;
+    private final Expression left;
+    private final Expression right;
 
     /**
      * Constructs a new BinaryExpression object.

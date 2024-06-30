@@ -14,7 +14,7 @@ import java.util.Map;
  * assign an expression to a variable, and simplify the expression.
  */
 public class Val implements Expression {
-    private Boolean value;
+    private final Boolean value;
 
     /**
      * Constructs a new Val object.

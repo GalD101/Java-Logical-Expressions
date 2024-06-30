@@ -9,8 +9,6 @@ import src.Expression;
  * The symbol for the NOR operation is represented by the "V" character.
  */
 public class Nor extends BinaryExpression implements Expression {
-    private final String symbol = "V";
-
     /**
      * Constructs a new Nor object.
      * This constructor initializes a new Nor object with the given left and right Expressions.
@@ -35,7 +33,7 @@ public class Nor extends BinaryExpression implements Expression {
 
     @Override
     protected String getOperatorSymbol() {
-        return symbol;
+        return "V";
     }
 
     @Override

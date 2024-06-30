@@ -12,7 +12,6 @@ import src.Expression;
  * The operator symbol for the XNOR operation is "#".
  */
 public class Xnor extends BinaryExpression implements Expression {
-    private final String symbol = "#";
 
     /**
      * Constructs a new Xnor object.
@@ -38,7 +37,7 @@ public class Xnor extends BinaryExpression implements Expression {
 
     @Override
     protected String getOperatorSymbol() {
-        return symbol;
+        return "#";
     }
 
     @Override

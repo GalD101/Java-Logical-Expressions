@@ -92,7 +92,7 @@ public class XorTest {
     @Test
     public void testToStringNegative() {
         assertNotEquals("(x ∧ y)", xorExpression.toString());
-        assertNotEquals("x ⊕ y", xorExpression.toString());
+        assertNotEquals("x ^ y", xorExpression.toString());
     }
 
     @Test

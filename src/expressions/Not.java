@@ -11,8 +11,6 @@ import java.util.Map;
  * The symbol for the NOT operation is represented by the "~" character.
  */
 public class Not extends UnaryExpression implements Expression {
-    private final String symbol = "~";
-
     /**
      * Constructs a new Not object.
      * This constructor initializes a new Not object with the given Expression.
@@ -36,15 +34,15 @@ public class Not extends UnaryExpression implements Expression {
 
     @Override
     protected String getOperatorSymbol() {
-        return symbol;
+        return "~";
     }
 
     @Override
     public String toString() {
         if ('(' == (this.getExpression().toString().charAt(0))) {
-            return symbol + this.getExpression().toString();
+            return this.getOperatorSymbol() + this.getExpression().toString();
         }
-        return symbol + "(" + this.getExpression().toString() + ")";
+        return this.getOperatorSymbol() + "(" + this.getExpression().toString() + ")";
     }
 
     @Override

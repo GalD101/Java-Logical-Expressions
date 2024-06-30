@@ -2,7 +2,6 @@ package src.expressions;
 
 import org.junit.Before;
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 import src.Expression;
 
@@ -91,7 +90,7 @@ public class XnorTest {
 
     @Test
     public void testToStringNegative() {
-        assertNotEquals("(x ⊕ y)", xnorExpression.toString());
+        assertNotEquals("(x ^ y)", xnorExpression.toString());
         assertNotEquals("x # y", xnorExpression.toString());
     }
 

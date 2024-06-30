@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
  * assign an expression to a variable, and simplify the expression.
  */
 public class Var implements Expression {
-    private String name;
+    private final String name;
 
     /**
      * Constructs a new Var object.

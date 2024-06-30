@@ -21,7 +21,7 @@ public class ExpressionOutput {
      *
      * @param args relevant
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Expression x = new Var("x");
         Expression y = new Var("y");
         Expression z = new Var("z");

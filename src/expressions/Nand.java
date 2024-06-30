@@ -9,8 +9,6 @@ import src.Expression;
  * The symbol for the NAND operation is represented by the "A" character.
  */
 public class Nand extends BinaryExpression implements Expression {
-    private final String symbol = "A";
-
     /**
      * Constructs a new Nand object.
      * This constructor initializes a new Nand object with the given left and right Expressions.
@@ -35,7 +33,7 @@ public class Nand extends BinaryExpression implements Expression {
 
     @Override
     protected String getOperatorSymbol() {
-        return symbol;
+        return "A";
     }
 
     @Override

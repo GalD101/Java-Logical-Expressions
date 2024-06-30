@@ -12,7 +12,6 @@ import src.Expression;
  * The operator symbol for the XOR operation is "^".
  */
 public class Xor extends BinaryExpression implements Expression {
-    private final String symbol = "^";
 
     /**
      * Constructs a new Xor object.
@@ -38,7 +37,7 @@ public class Xor extends BinaryExpression implements Expression {
 
     @Override
     protected String getOperatorSymbol() {
-        return symbol;
+        return "^";
     }
 
     @Override
