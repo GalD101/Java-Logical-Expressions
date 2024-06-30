@@ -1,7 +1,7 @@
-package src.expressions;
+package src;
 
 import org.junit.Test;
-import src.Expression;
+import src.expressions.*;
 
 import static org.junit.Assert.assertEquals;
 

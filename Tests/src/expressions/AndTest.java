@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import src.Expression;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -125,5 +126,62 @@ public class AndTest {
         Expression newExpression = andExpression.assign("x", new Val(true));
         assertEquals(new And(new Val(true), new Var("y")).toString(), newExpression.toString());
         assertEquals(new And(new Val(true), new Var("y")).toString(), newExpression.toString());
+    }
+
+    @Test
+    public void testAndWithTrueTrue() throws Exception {
+        Expression expr = new And(new Val(true), new Val(true));
+        assertTrue(expr.evaluate());
+    }
+
+    @Test
+    public void testAndWithTrueFalse() throws Exception {
+        Expression expr = new And(new Val(true), new Val(false));
+        assertFalse(expr.evaluate());
+    }
+
+    @Test
+    public void testAndWithFalseFalse() throws Exception {
+        Expression expr = new And(new Val(false), new Val(false));
+        assertFalse(expr.evaluate());
+    }
+
+    @Test
+    public void testAndWithFalseTrue() throws Exception {
+        Expression expr = new And(new Val(false), new Val(true));
+        assertFalse(expr.evaluate());
+    }
+
+    @Test
+    public void testAndWithVariable() throws Exception {
+        Expression expr = new And(new Var("x"), new Val(true));
+        Map<String, Boolean> assignment = new HashMap<>();
+        assignment.put("x", true);
+        assertTrue(expr.evaluate(assignment));
+        assignment.put("x", false);
+        assertFalse(expr.evaluate(assignment));
+    }
+
+    @Test
+    public void testAndWithNull() {
+        Expression expr = new And(new Val(true), null);
+        assertThrows(NullPointerException.class, () -> {
+            expr.evaluate();
+        });
+    }
+
+    @Test
+    public void testAndToString() {
+        Expression expr = new And(new Val(true), new Val(false));
+        assertEquals("(T & F)", expr.toString());
+    }
+
+    @Test
+    public void testAndSimplify() {
+        Expression expr = new And(new And(new Var("x"), new Var("y")), new And(new Var("x"), new Var("y")));
+        assertEquals("(x & y)", expr.simplify().toString());
+
+        Expression expr2 = new And(new And(new Var("x"), new Var("y")), new Val(true));
+        assertEquals("(x & y)", expr2.simplify().toString());
     }
 }

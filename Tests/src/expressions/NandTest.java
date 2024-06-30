@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import src.Expression;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -124,5 +125,53 @@ public class NandTest {
         Expression newExpression = nandExpression.assign("x", new Val(true));
         assertEquals(new Nand(new Val(true), new Var("y")).toString(), newExpression.toString());
         assertEquals(new Nand(new Val(true), new Var("y")).toString(), newExpression.toString());
+    }
+
+    @Test
+    public void testNandWithTrueTrue() throws Exception {
+        Expression expr = new Nand(new Val(true), new Val(true));
+        assertFalse(expr.evaluate());
+    }
+
+    @Test
+    public void testNandWithTrueFalse() throws Exception {
+        Expression expr = new Nand(new Val(true), new Val(false));
+        assertTrue(expr.evaluate());
+    }
+
+    @Test
+    public void testNandWithFalseFalse() throws Exception {
+        Expression expr = new Nand(new Val(false), new Val(false));
+        assertTrue(expr.evaluate());
+    }
+
+    @Test
+    public void testNandWithFalseTrue() throws Exception {
+        Expression expr = new Nand(new Val(false), new Val(true));
+        assertTrue(expr.evaluate());
+    }
+
+    @Test
+    public void testNandWithVariable() throws Exception {
+        Expression expr = new Nand(new Var("x"), new Val(true));
+        Map<String, Boolean> assignment = new HashMap<>();
+        assignment.put("x", true);
+        assertFalse(expr.evaluate(assignment));
+        assignment.put("x", false);
+        assertTrue(expr.evaluate(assignment));
+    }
+
+    @Test
+    public void testNandWithNull() {
+        Expression expr = new Nand(new Val(true), null);
+        assertThrows(NullPointerException.class, () -> {
+            expr.evaluate();
+        });
+    }
+
+    @Test
+    public void testNandToString() {
+        Expression expr = new Nand(new Val(true), new Val(false));
+        assertEquals("(T A F)", expr.toString());
     }
 }

@@ -1,6 +1,7 @@
 package src.expressions;
 
 import org.junit.Test;
+import src.Expression;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -90,5 +91,14 @@ public class OrTest {
     public void testSimplifyComplexExpression() {
         Or orExpr = new Or(new And(new Val(true), new Var("x")), new Or(new Val(false), new Var("y")));
         assertEquals(new Or(new Var("x"), new Var("y")).toString(), orExpr.simplify().toString());
+    }
+
+    @Test
+    public void testOrSimplify() {
+        Expression expr = new Or(new Or(new Var("x"), new Var("y")), new Or(new Var("x"), new Var("y")));
+        assertEquals("(x | y)", expr.simplify().toString());
+
+        Expression expr2 = new Or(new Or(new Var("x"), new Var("y")), new Val(false));
+        assertEquals("(x | y)", expr2.simplify().toString());
     }
 }
