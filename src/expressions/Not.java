@@ -39,9 +39,6 @@ public class Not extends UnaryExpression implements Expression {
 
     @Override
     public String toString() {
-        if ('(' == (this.getExpression().toString().charAt(0))) {
-            return this.getOperatorSymbol() + this.getExpression().toString();
-        }
         return this.getOperatorSymbol() + "(" + this.getExpression().toString() + ")";
     }
 
